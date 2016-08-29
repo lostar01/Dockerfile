@@ -1,11 +1,16 @@
 FROM docker.io/centos
 MAINTAINER 2367192101@qq.com
 
+ENV TZ "Asia/Shanghai"
+
 ADD simkai.ttf /usr/share/fonts/
 ADD simsun.ttf /usr/share/fonts/
-RUN  yum install -y fontconfig xorg-x11-font-utils yum install kde-l10n-Chinese  && \
+
+# Use the aliyun mirror.
+RUN curl http://mirrors.aliyun.com/repo/Centos-7.repo >> /etc/yum.repos.d/CentOS-Base.repo && \
+    ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone && \
+     yum install -y fontconfig xorg-x11-font-utils yum install kde-l10n-Chinese  && \
      yum reinstall -y glibc-common && \
-     /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
      mkdir /usr/share/fonts/simkai && \
      mkdir /usr/share/fonts/simsun && \
      mv /usr/share/fonts/simkai.ttf /usr/share/fonts/simkai/ && \

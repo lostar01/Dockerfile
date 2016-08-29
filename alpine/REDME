@@ -1,0 +1,6 @@
+
+#BUILD This image you can add daocloud speed
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://d533c89b.m.daocloud.io
+
+docker build -t registry.lnetco.com/aline-lnet-java:1.8 .
+
